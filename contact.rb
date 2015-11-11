@@ -8,11 +8,11 @@ require_relative 'contact_database'
 class Contact
   attr_accessor :name, :email
 
-  def initialize(name, email)
+  def initialize(email, name)
     # TODO: assign local variables to instance variables
     @name = name
     @email = email
-    @entry_array = [@name, @email]
+    @entry_array = [@email, @name]
     ContactDatabase.save(@entry_array)
   end
 
@@ -22,7 +22,7 @@ class Contact
   end
  
  def save
-    array = [self.name, self.email]
+    array = [self.email, self.name]
     ContactDatabase.save(@entry_array)
  end
 
@@ -33,7 +33,7 @@ class Contact
     #show - Show a contact
     #find - Find a contact
   class << self
-    def create(name, email)
+    def create(email, name)
     #   # TODO: Will initialize a contact as well as add it to the list of contacts
       
     end
