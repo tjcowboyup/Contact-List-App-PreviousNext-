@@ -38,8 +38,24 @@ def command
       else
         p "Enter name: "
         @name = STDIN.gets.chomp
-        Contact.new(@email, @name)
-        p "#{@email} - #{@name} is added to contacts database"
+        
+        p "Entering phone number(s)? [Y/N]"
+        @ans = STDIN.gets.chomp
+        if @ans == 'Y'
+          p "Enter phone numbe type and number: [N to quit entering]"
+          @phone = STDIN.gets.chomp.split(' ')
+          Contact.new(@email, @name, @phone)
+          p @phone[@phone.size]
+          while @phone[@phone.size-1][0] != 'N'
+            p "Enter phone numbe type and number: "
+            @phone << STDIN.gets.chomp.split(' ')
+          end
+          @phone.pop if @phone[@phone.size-1][0] == 'N'
+        else
+          Contact.new(@email, @name, nil)
+        end
+
+        p "#{@email}, #{@name}, #{@phone} is added to contacts database"
       end
     when "list"
       @answer = ContactDatabase.new
