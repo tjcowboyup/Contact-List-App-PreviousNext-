@@ -6,23 +6,25 @@ require_relative 'contact_database'
 #  csv << [a_string]
 #  end
 class Contact
-  attr_accessor :name, :email
+  attr_accessor :email, :name, :phone
 
-  def initialize(email, name)
+  def initialize(email, name, phone)
     # TODO: assign local variables to instance variables
-    @name = name
     @email = email
-    @entry_array = [@email, @name]
+    @name = name
+    @phone = []
+    @phone = phone
+    @entry_array = [@email, @name, @phone]
     ContactDatabase.save(@entry_array)
   end
 
   def to_s
     # TODO: return string representation of Contact
-    @name.to_s + @email.to_s
+    @email.to_s + @name.to_s + @phone.to_s
   end
  
  def save
-    array = [self.email, self.name]
+    array = [self.email, self.name, self.phone]
     ContactDatabase.save(@entry_array)
  end
 
@@ -33,9 +35,8 @@ class Contact
     #show - Show a contact
     #find - Find a contact
   class << self
-    def create(email, name)
-    #   # TODO: Will initialize a contact as well as add it to the list of contacts
-      
+    def create(email, name, phone)
+    #   # TODO: Will initialize a contact as well as add it to the list of contacts  
     end
 
     def find(term)
